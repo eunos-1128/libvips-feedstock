@@ -45,7 +45,7 @@ libmatio:
 libpng:
 - '1.6'
 libraw:
-- '0.21'
+- '0.22'
 librsvg:
 - '2'
 libtiff:
