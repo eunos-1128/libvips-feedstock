@@ -68,8 +68,8 @@ requirements:
     - expat
     - fftw
     - fontconfig
-    # needed to find HarfBuzz on Windows
-    - freetype                               # [win]
+    # needed for `pkg-config --cflags pangocairo`
+    - freetype
     - gettext                                # [osx]
     - glib
     - imagemagick                            # [unix]
@@ -85,6 +85,7 @@ requirements:
     - libjpeg-turbo
     - libjxl
     # needed for lzma.lib on Windows
+    # https://github.com/conda-forge/libxml2-feedstock/issues/164
     - liblzma-devel                          # [win]
     - libmatio
     - libpng
@@ -92,13 +93,14 @@ requirements:
     - librsvg
     - libtiff
     - libwebp
-    # needed to find librsvg on Windows
-    - libxml2-devel                          # [win]
+    # needed for `pkg-config --cflags librsvg-2.0`
+    - libxml2-devel
     - openjpeg
     - openslide
     - pango
     - poppler
     # needed to find OpenSlide on Linux
+    # https://github.com/conda-forge/xorg-libx11-feedstock/issues/51
     - xorg-xorgproto                         # [linux]
     - zlib
   run:
