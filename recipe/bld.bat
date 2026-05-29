@@ -31,6 +31,7 @@ sed -i "/subdir('fuzz')/d" meson.build
 if %ERRORLEVEL% neq 0 exit /b 1
 
 @REM MSVC does not define ssize_t; replace with la_ssize_t from libarchive
+@REM Remove when libvips 8.18.3 is released
 sed -i "s/^static ssize_t$/static la_ssize_t/" %SRC_DIR%/libvips/foreign/archive.c
 if %ERRORLEVEL% neq 0 exit /b 1
 
