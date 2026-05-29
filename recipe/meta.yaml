@@ -40,17 +40,19 @@ requirements:
     - expat                                  # [build_platform != target_platform]
     - fftw                                   # [build_platform != target_platform]
     - fontconfig                             # [build_platform != target_platform]
+    - gettext                                # [(build_platform != target_platform) and osx]
     - glib                                   # [build_platform != target_platform]
-    - libhwy                                 # [build_platform != target_platform]
-    - libjpeg-turbo                          # [build_platform != target_platform]
-    - libjxl                                 # [build_platform != target_platform]
     - imagemagick                            # [(build_platform != target_platform) and unix]
     - lcms2                                  # [build_platform != target_platform]
-    - libexif                                # [build_platform != target_platform]
     - libarchive                             # [build_platform != target_platform]
     # Specify lgpl so that there isn't any concern about the license
     # which this software was built with.
     - libarchive * lgpl_*                    # [build_platform != target_platform]
+    - libexif                                # [build_platform != target_platform]
+    - libheif                                # [build_platform != target_platform]
+    - libhwy                                 # [build_platform != target_platform]
+    - libjpeg-turbo                          # [build_platform != target_platform]
+    - libjxl                                 # [build_platform != target_platform]
     - libmatio                               # [build_platform != target_platform]
     - libpng                                 # [build_platform != target_platform]
     - libraw                                 # [build_platform != target_platform]
@@ -61,8 +63,6 @@ requirements:
     - pango                                  # [build_platform != target_platform]
     - poppler                                # [build_platform != target_platform]
     - zlib                                   # [build_platform != target_platform]
-    - libheif                                # [build_platform != target_platform]
-    - gettext                                # [(build_platform != target_platform) and osx]
   host:
     - cairo
     - cfitsio
@@ -71,18 +71,20 @@ requirements:
     - fontconfig
     # needed to find HarfBuzz on Windows
     - freetype                               # [win]
+    - gettext                                # [osx]
     - glib
-    - libhwy
     - imagemagick                            # [unix]
-    - libjpeg-turbo
-    - libjxl
     - lcms2
-    - libexif
     - libarchive
     # Specify lgpl so that there isn't any concern about the license
     # which this software was built with.
     - libarchive * lgpl_*
+    - libexif
     - libgirepository
+    - libheif
+    - libhwy
+    - libjpeg-turbo
+    - libjxl
     # needed for lzma.lib on Windows
     - liblzma-devel                          # [win]
     - libmatio
@@ -90,18 +92,16 @@ requirements:
     - libraw
     - librsvg
     - libtiff
+    - libwebp
     # needed to find librsvg on Windows
     - libxml2-devel                          # [win]
-    - libwebp
+    - openjpeg
     - openslide
     - pango
     - poppler
-    - zlib
-    - libheif
-    - openjpeg
-    - gettext                                # [osx]
-    # needed to find openslide on linux
+    # needed to find OpenSlide on Linux
     - xorg-xorgproto                         # [linux]
+    - zlib
   run:
     - imagemagick                            # [unix]
     - libintl                                # [win]
