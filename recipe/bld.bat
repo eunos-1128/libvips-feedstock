@@ -1,9 +1,6 @@
 @echo on
 setlocal enabledelayedexpansion
 
-@REM Override `MESON_ARGS` to drop `--pkg-config-path` (broken quoting on Windows); rely on `PKG_CONFIG_PATH` instead
-set "MESON_ARGS=-Dbuildtype=release --prefix=%PREFIX%\Library -Dlibdir=lib -Ddefault_library=shared"
-
 @REM `magick=disabled`: no Windows package available on conda-forge
 @REM `introspection=disabled`: g-ir-scanner fails to link libarchive dependencies on Windows (Unix lib names: bz2, lz4, etc.)
 set meson_config_args=^
@@ -25,6 +22,7 @@ if %ERRORLEVEL% neq 0 exit /b 1
 sed -i "/^Libs.private:/s/ -lstdc++//" "%LIBRARY_LIB%\pkgconfig\libde265.pc"
 if %ERRORLEVEL% neq 0 exit /b 1
 
+@REM Set pkg-config path so that host deps can be found
 set "PKG_CONFIG_PATH=%PREFIX%\Library\lib\pkgconfig;%PREFIX%\Library\share\pkgconfig;%BUILD_PREFIX%\Library\lib\pkgconfig"
 
 @REM MSVC does not support `__attribute__((weak))`
