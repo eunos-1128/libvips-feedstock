@@ -12,25 +12,26 @@ source:
   sha256: a30d4aede16f1c2899c1a2241870f8a7409feafa38484bcdcdac113d6d6f8ff5
 
 build:
-  number: 4
-  skip: true  # [win]
+  number: 5
   run_exports:
     # Seems rather stable between minor versions. Only pin the major version
     # https://abi-laboratory.pro/index.php?view=timeline&l=vips
     - {{ pin_subpackage('libvips', max_pin='x') }}
   ignore_run_exports_from:
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [(build_platform != target_platform)]
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ stdlib('c') }}
     - {{ compiler('cxx') }}
+    - cross-python_{{ target_platform }}     # [(build_platform != target_platform) and not win]
     - ninja
     - meson
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - pkg-config                             # [not win]
+    - m2-sed                                 # [win]
+    - pkg-config
     - gobject-introspection
+    - python *                               # [win]
     # wow... g-ir-scanner is really annoying
     # we will need to build everything for the native architecture to scan it
     # https://gitlab.gnome.org/GNOME/gobject-introspection/-/issues/462
@@ -43,7 +44,7 @@ requirements:
     - libhwy                                 # [build_platform != target_platform]
     - libjpeg-turbo                          # [build_platform != target_platform]
     - libjxl                                 # [build_platform != target_platform]
-    - imagemagick                            # [build_platform != target_platform]
+    - imagemagick                            # [(build_platform != target_platform) and unix]
     - lcms2                                  # [build_platform != target_platform]
     - libexif                                # [build_platform != target_platform]
     - libarchive                             # [build_platform != target_platform]
@@ -63,15 +64,16 @@ requirements:
     - libheif                                # [build_platform != target_platform]
     - gettext                                # [(build_platform != target_platform) and osx]
   host:
-    - libgirepository
     - cairo
     - cfitsio
     - expat
     - fftw
     - fontconfig
+    # needed to find HarfBuzz on Windows
+    - freetype                               # [win]
     - glib
     - libhwy
-    - imagemagick
+    - imagemagick                            # [unix]
     - libjpeg-turbo
     - libjxl
     - lcms2
@@ -80,11 +82,16 @@ requirements:
     # Specify lgpl so that there isn't any concern about the license
     # which this software was built with.
     - libarchive * lgpl_*
+    - libgirepository
+    # needed for lzma.lib on Windows
+    - liblzma-devel                          # [win]
     - libmatio
     - libpng
     - libraw
     - librsvg
     - libtiff
+    # needed to find librsvg on Windows
+    - libxml2-devel                          # [win]
     - libwebp
     - openslide
     - pango
@@ -96,8 +103,8 @@ requirements:
     # needed to find openslide on linux
     - xorg-xorgproto                         # [linux]
   run:
-    - libexif
-    - imagemagick
+    - imagemagick                            # [unix]
+    - libintl                                # [win]
 
 test:
   commands:

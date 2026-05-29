@@ -1,0 +1,64 @@
+c_compiler:
+- vs2022
+c_stdlib:
+- vs
+cairo:
+- '1'
+cfitsio:
+- 4.6.4
+channel_sources:
+- conda-forge
+channel_targets:
+- conda-forge main
+cxx_compiler:
+- vs2022
+expat:
+- '2'
+fftw:
+- '3'
+fontconfig:
+- '2'
+freetype:
+- '2'
+glib:
+- '2'
+lcms2:
+- '2'
+libarchive:
+- '3.8'
+libheif:
+- '1.19'
+libhwy:
+- '1.4'
+libjpeg_turbo:
+- '3'
+liblzma_devel:
+- '5'
+libmatio:
+- 1.5.30
+libpng:
+- '1.6'
+libraw:
+- '0.22'
+librsvg:
+- '2'
+libtiff:
+- '4.7'
+libvips:
+- '8'
+libwebp:
+- '1'
+libxml2_devel:
+- '2.14'
+openjpeg:
+- '2'
+openslide:
+- '4'
+pango:
+- '1'
+poppler:
+- '26.05'
+target_platform:
+- win-64
+zlib:
+- '1'
