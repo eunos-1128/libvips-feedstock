@@ -16,12 +16,6 @@ set meson_config_args=^
     -Dmagick=disabled ^
     -Dintrospection=disabled
 
-@REM Remove -lstdc++ from Libs.private, it won't work on MSVC
-sed -i "/^Libs.private:/s/ -lstdc++//" "%LIBRARY_LIB%\pkgconfig\libheif.pc"
-if %ERRORLEVEL% neq 0 exit /b 1
-sed -i "/^Libs.private:/s/ -lstdc++//" "%LIBRARY_LIB%\pkgconfig\libde265.pc"
-if %ERRORLEVEL% neq 0 exit /b 1
-
 @REM Set pkg-config path so that host deps can be found
 set "PKG_CONFIG_PATH=%LIBRARY_LIB%\pkgconfig;%LIBRARY_PREFIX%\share\pkgconfig;%BUILD_PREFIX%\Library\lib\pkgconfig"
 

@@ -13,6 +13,10 @@ source:
 
 build:
   number: 5
+  script_env:
+    # Switch default pkg-config implementation to pkgconf
+    # https://github.com/conda-forge/conda-forge.github.io/issues/1880
+    - PKG_CONFIG=pkgconf
   run_exports:
     # Seems rather stable between minor versions. Only pin the major version
     # https://abi-laboratory.pro/index.php?view=timeline&l=vips
@@ -29,7 +33,7 @@ requirements:
     - ninja
     - meson
     - m2-sed                                 # [win]
-    - pkg-config
+    - pkgconf
     - gobject-introspection
     # wow... g-ir-scanner is really annoying
     # we will need to build everything for the native architecture to scan it
@@ -68,7 +72,7 @@ requirements:
     - expat
     - fftw
     - fontconfig
-    # needed for `pkg-config --cflags pangocairo`
+    # needed for `pkgconf --cflags pangocairo`
     - freetype
     - gettext                                # [osx]
     - glib
@@ -84,16 +88,13 @@ requirements:
     - libhwy
     - libjpeg-turbo
     - libjxl
-    # needed for lzma.lib on Windows
-    # https://github.com/conda-forge/libxml2-feedstock/issues/164
-    - liblzma-devel                          # [win]
     - libmatio
     - libpng
     - libraw
     - librsvg
     - libtiff
     - libwebp
-    # needed for `pkg-config --cflags librsvg-2.0`
+    # needed for `pkgconf --cflags librsvg-2.0`
     - libxml2-devel
     - openjpeg
     - openslide
