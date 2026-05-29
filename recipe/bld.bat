@@ -23,7 +23,7 @@ sed -i "/^Libs.private:/s/ -lstdc++//" "%LIBRARY_LIB%\pkgconfig\libde265.pc"
 if %ERRORLEVEL% neq 0 exit /b 1
 
 @REM Set pkg-config path so that host deps can be found
-set "PKG_CONFIG_PATH=%PREFIX%\Library\lib\pkgconfig;%PREFIX%\Library\share\pkgconfig;%BUILD_PREFIX%\Library\lib\pkgconfig"
+set "PKG_CONFIG_PATH=%LIBRARY_LIB%\pkgconfig;%LIBRARY_PREFIX%\share\pkgconfig;%BUILD_PREFIX%\Library\lib\pkgconfig"
 
 @REM MSVC does not support `__attribute__((weak))`
 @REM Remove when libvips 8.19 is released (it builds with -Dfuzz=false by default)
@@ -47,7 +47,7 @@ if %ERRORLEVEL% neq 0 exit /b 1
 
 @REM Remove .lib files from module directory
 @REM (Windows: meson installs import libraries alongside DLLs, but modules are loaded dynamically, not linked)
-for /d %%d in (%PREFIX%\Library\lib\vips-modules-*) do (
+for /d %%d in (%LIBRARY_LIB%\vips-modules-*) do (
     del /f /q "%%d\*.lib"
 )
 if %ERRORLEVEL% neq 0 exit /b 1
