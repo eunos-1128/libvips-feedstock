@@ -35,20 +35,10 @@ set "LIB_PREFIX=%PREFIX:\=/%/Library"
 ) > "%BUILD_PREFIX%\Library\lib\pkgconfig\lcms2.pc"
 if %ERRORLEVEL% neq 0 exit /b 1
 
-@REM libheif.pc on Windows pulls in -lstdc++ via Requires.private (de265, x265)
-@REM overwrite with a minimal shim that omits it
-for /f %%i in ('python -c "import json,glob; files=[f for f in glob.glob(r\"%PREFIX%\conda-meta\libheif-*.json\") if __import__(\"os\").path.basename(f).startswith(\"libheif-\")]; print(json.load(open(files[0]))[\"version\"])"') do set LIBHEIF_VER=%%i
-(
-    echo prefix=%LIB_PREFIX%
-    echo libdir=%LIB_PREFIX%/lib
-    echo includedir=%LIB_PREFIX%/include
-    echo.
-    echo Name: libheif
-    echo Version: %LIBHEIF_VER%
-    echo Description: HEIF image codec
-    echo Libs: -L%LIB_PREFIX%/lib -lheif
-    echo Cflags: -I%LIB_PREFIX%/include
-) > "%PREFIX%\Library\lib\pkgconfig\libheif.pc"
+@REM Remove -lstdc++ from Libs.private, it won't work on MSVC
+sed -i "/^Libs.private:/s/ -lstdc++//" "%LIBRARY_LIB%\pkgconfig\libheif.pc"
+if %ERRORLEVEL% neq 0 exit /b 1
+sed -i "/^Libs.private:/s/ -lstdc++//" "%LIBRARY_LIB%\pkgconfig\libde265.pc"
 if %ERRORLEVEL% neq 0 exit /b 1
 
 set "PKG_CONFIG_PATH=%PREFIX%\Library\lib\pkgconfig;%PREFIX%\Library\share\pkgconfig;%BUILD_PREFIX%\Library\lib\pkgconfig"
