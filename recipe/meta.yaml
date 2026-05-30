@@ -18,7 +18,7 @@ build:
     # https://abi-laboratory.pro/index.php?view=timeline&l=vips
     - {{ pin_subpackage('libvips', max_pin='x') }}
   ignore_run_exports_from:
-    - cross-python_{{ target_platform }}     # [(build_platform != target_platform)]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
 
 requirements:
   build:
