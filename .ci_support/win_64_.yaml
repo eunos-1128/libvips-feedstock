@@ -32,8 +32,6 @@ libhwy:
 - '1.4'
 libjpeg_turbo:
 - '3'
-liblzma_devel:
-- '5'
 libmatio:
 - 1.5.30
 libpng:
