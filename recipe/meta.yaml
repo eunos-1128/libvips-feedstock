@@ -31,7 +31,6 @@ requirements:
     - m2-sed                                 # [win]
     - pkg-config
     - gobject-introspection
-    - python *                               # [win]
     # wow... g-ir-scanner is really annoying
     # we will need to build everything for the native architecture to scan it
     # https://gitlab.gnome.org/GNOME/gobject-introspection/-/issues/462

@@ -19,22 +19,6 @@ set meson_config_args=^
     -Dmagick=disabled ^
     -Dintrospection=disabled
 
-@REM lcms2 on Windows (conda-forge) does not ship lcms2.pc; create a shim
-for /f %%i in ('python -c "import json,glob; files=[f for f in glob.glob(r\"%PREFIX%\conda-meta\lcms2-*.json\") if f.split(chr(92))[-1].startswith(\"lcms2-\")]; print(json.load(open(files[0]))[\"version\"])"') do set LCMS2_VER=%%i
-set "LIB_PREFIX=%PREFIX:\=/%/Library"
-(
-    echo prefix=%LIB_PREFIX%
-    echo libdir=%LIB_PREFIX%/lib
-    echo includedir=%LIB_PREFIX%/include
-    echo.
-    echo Name: lcms2
-    echo Version: %LCMS2_VER%
-    echo Description: Little CMS color management library
-    echo Libs: -L%LIB_PREFIX%/lib -llcms2
-    echo Cflags: -I%LIB_PREFIX%/include
-) > "%BUILD_PREFIX%\Library\lib\pkgconfig\lcms2.pc"
-if %ERRORLEVEL% neq 0 exit /b 1
-
 @REM Remove -lstdc++ from Libs.private, it won't work on MSVC
 sed -i "/^Libs.private:/s/ -lstdc++//" "%LIBRARY_LIB%\pkgconfig\libheif.pc"
 if %ERRORLEVEL% neq 0 exit /b 1
