@@ -24,6 +24,7 @@ if [ "${CONDA_BUILD_CROSS_COMPILATION}" = "1" ]; then
         export NM=$($CC_FOR_BUILD -print-prog-name=nm)
         export LDFLAGS=${LDFLAGS//$PREFIX/$BUILD_PREFIX}
         export PKG_CONFIG_PATH=${BUILD_PREFIX}/lib/pkgconfig
+        export PKG_CONFIG_ALLOW_SYSTEM_CFLAGS=1
 
         # Unset them as we're ok with builds that are either slow or non-portable
         unset CFLAGS
@@ -61,7 +62,7 @@ fi
 
 # Allow pkg-config to find gobject-introspection from the build tools
 # https://gitlab.gnome.org/GNOME/gobject-introspection/-/issues/462
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$BUILD_PREFIX/lib/pkgconfig
+export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:$PREFIX/share/pkgconfig:$BUILD_PREFIX/lib/pkgconfig"
 
 meson setup build \
     ${MESON_ARGS} \

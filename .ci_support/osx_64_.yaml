@@ -28,6 +28,8 @@ fftw:
 - '3'
 fontconfig:
 - '2'
+freetype:
+- '2'
 glib:
 - '2'
 lcms2:
@@ -54,6 +56,8 @@ libvips:
 - '8'
 libwebp:
 - '1'
+libxml2_devel:
+- '2.14'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 openjpeg:
