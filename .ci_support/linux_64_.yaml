@@ -35,7 +35,7 @@ lcms2:
 libarchive:
 - '3.8'
 libheif:
-- '1.19'
+- '1.23'
 libhwy:
 - '1.4'
 libjpeg_turbo:
