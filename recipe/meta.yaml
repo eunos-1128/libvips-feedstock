@@ -1,7 +1,7 @@
 # Notes
 # - `cgif`, `imagequant`, `matio`, `niftiio`, `openexr`, `libuhdr` are missing
 
-{% set version = "8.18.2" %}
+{% set version = "8.18.3" %}
 
 package:
   name: libvips
@@ -9,10 +9,10 @@ package:
 
 source:
   url: https://github.com/libvips/libvips/releases/download/v{{ version }}/vips-{{ version }}.tar.xz
-  sha256: a30d4aede16f1c2899c1a2241870f8a7409feafa38484bcdcdac113d6d6f8ff5
+  sha256: f41285b61bfb495605494f074ca341f7791a1d406e2f157dcea606ef1ae1b146
 
 build:
-  number: 7
+  number: 0
   script_env:
     # Switch default pkg-config implementation to pkgconf
     # https://github.com/conda-forge/conda-forge.github.io/issues/1880
@@ -43,6 +43,8 @@ requirements:
     - expat                                  # [build_platform != target_platform]
     - fftw                                   # [build_platform != target_platform]
     - fontconfig                             # [build_platform != target_platform]
+    # needed for `pkgconf --cflags pangocairo`
+    - freetype                               # [build_platform != target_platform]
     - gettext                                # [(build_platform != target_platform) and osx]
     - glib                                   # [build_platform != target_platform]
     - imagemagick                            # [(build_platform != target_platform) and unix]
@@ -62,6 +64,8 @@ requirements:
     - librsvg                                # [build_platform != target_platform]
     - libtiff                                # [build_platform != target_platform]
     - libwebp                                # [build_platform != target_platform]
+    # needed for `pkgconf --cflags librsvg-2.0`
+    - libxml2-devel                          # [build_platform != target_platform]
     - openslide                              # [build_platform != target_platform]
     - pango                                  # [build_platform != target_platform]
     - poppler                                # [build_platform != target_platform]
