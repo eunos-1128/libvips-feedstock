@@ -43,6 +43,8 @@ requirements:
     - expat                                  # [build_platform != target_platform]
     - fftw                                   # [build_platform != target_platform]
     - fontconfig                             # [build_platform != target_platform]
+    # needed for `pkgconf --cflags pangocairo`
+    - freetype                               # [build_platform != target_platform]
     - gettext                                # [(build_platform != target_platform) and osx]
     - glib                                   # [build_platform != target_platform]
     - imagemagick                            # [(build_platform != target_platform) and unix]
@@ -62,6 +64,8 @@ requirements:
     - librsvg                                # [build_platform != target_platform]
     - libtiff                                # [build_platform != target_platform]
     - libwebp                                # [build_platform != target_platform]
+    # needed for `pkgconf --cflags librsvg-2.0`
+    - libxml2-devel                          # [build_platform != target_platform]
     - openslide                              # [build_platform != target_platform]
     - pango                                  # [build_platform != target_platform]
     - poppler                                # [build_platform != target_platform]
