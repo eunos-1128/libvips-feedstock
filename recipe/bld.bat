@@ -1,17 +1,18 @@
 @echo on
 setlocal enabledelayedexpansion
 
-@REM Workaround: ImageMagick headers installed by conda-forge are built with
-@REM autotools/clang, so magick-config.h sets MAGICKCORE_HAVE___ATTRIBUTE__=1.
-@REM This causes method-attribute.h to emit raw __attribute__(...) syntax and
-@REM magick_restrict to expand to __restrict__, both of which MSVC (cl.exe)
-@REM does not understand.
-@REM Defining MAGICKCORE_WINDOWS_SUPPORT redirects method-attribute.h to the
-@REM MSVC-safe branch where these macros become no-ops or __declspec equivalents.
-@REM Also, ssize_t is a POSIX type not defined in the Windows SDK; use ptrdiff_t.
-set "CL=%CL% /DMAGICKCORE_WINDOWS_SUPPORT /Dssize_t=ptrdiff_t"
-
 @REM `introspection=disabled`: g-ir-scanner fails to link libarchive dependencies on Windows (Unix lib names: bz2, lz4, etc.)
+@REM
+@REM -Dc_args workaround for ImageMagick headers built with autotools/clang:
+@REM   The installed magick-config.h sets MAGICKCORE_HAVE___ATTRIBUTE__=1,
+@REM   causing method-attribute.h to emit raw __attribute__(...) and
+@REM   magick_restrict to expand to __restrict__ -- both GCC/Clang-only syntax
+@REM   that MSVC (cl.exe) does not understand.
+@REM   /DMAGICKCORE_WINDOWS_SUPPORT redirects method-attribute.h to the
+@REM   MSVC-safe branch where these macros become no-ops.
+@REM   /Dssize_t=ptrdiff_t: ssize_t is POSIX-only, not defined in the MSVC SDK.
+@REM   NOTE: CL and CFLAGS env vars are not reliably propagated to meson compile;
+@REM   -Dc_args is the official Meson way to pass per-compiler flags.
 set meson_config_args=^
     -Dauto_features=enabled ^
     -Dcgif=disabled ^
@@ -22,7 +23,8 @@ set meson_config_args=^
     -Dpdfium=disabled ^
     -Dquantizr=disabled ^
     -Duhdr=disabled ^
-    -Dintrospection=disabled
+    -Dintrospection=disabled ^
+    -Dc_args="/DMAGICKCORE_WINDOWS_SUPPORT /Dssize_t=ptrdiff_t"
 
 @REM Set pkg-config path so that host deps can be found
 set "PKG_CONFIG_PATH=%LIBRARY_LIB%\pkgconfig;%LIBRARY_PREFIX%\share\pkgconfig;%BUILD_PREFIX%\Library\lib\pkgconfig"
