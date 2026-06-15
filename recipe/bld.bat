@@ -1,6 +1,9 @@
 @echo on
 setlocal enabledelayedexpansion
 
+@REM Workaround: ImageMagick headers on Windows require ssize_t
+set "CL=%CL% /Dssize_t=ptrdiff_t"
+
 @REM `introspection=disabled`: g-ir-scanner fails to link libarchive dependencies on Windows (Unix lib names: bz2, lz4, etc.)
 set meson_config_args=^
     -Dauto_features=enabled ^
