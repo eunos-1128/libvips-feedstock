@@ -1,7 +1,6 @@
 @echo on
 setlocal enabledelayedexpansion
 
-@REM `magick=disabled`: no Windows package available on conda-forge
 @REM `introspection=disabled`: g-ir-scanner fails to link libarchive dependencies on Windows (Unix lib names: bz2, lz4, etc.)
 set meson_config_args=^
     -Dauto_features=enabled ^
@@ -13,7 +12,6 @@ set meson_config_args=^
     -Dpdfium=disabled ^
     -Dquantizr=disabled ^
     -Duhdr=disabled ^
-    -Dmagick=disabled ^
     -Dintrospection=disabled
 
 @REM Set pkg-config path so that host deps can be found
