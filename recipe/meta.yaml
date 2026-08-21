@@ -47,7 +47,7 @@ requirements:
     - freetype                               # [build_platform != target_platform]
     - gettext                                # [(build_platform != target_platform) and osx]
     - glib                                   # [build_platform != target_platform]
-    - imagemagick                            # [build_platform != target_platform]
+    - imagemagick * imagemagick_*            # [build_platform != target_platform]
     - lcms2                                  # [build_platform != target_platform]
     - libarchive                             # [build_platform != target_platform]
     # Specify lgpl so that there isn't any concern about the license
@@ -80,7 +80,7 @@ requirements:
     - freetype
     - gettext                                # [osx]
     - glib
-    - imagemagick
+    - imagemagick * imagemagick_*
     - lcms2
     - libarchive
     # Specify lgpl so that there isn't any concern about the license
