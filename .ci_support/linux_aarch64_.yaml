@@ -19,7 +19,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '14'
 docker_image:
-- quay.io/condaforge/linux-anvil-x86_64:alma9
+- quay.io/condaforge/linux-anvil-x86_64:alma10
 expat:
 - '2'
 fftw:
@@ -40,6 +40,8 @@ libhwy:
 - '1.4'
 libjpeg_turbo:
 - '3'
+libjxl:
+- '0.12'
 libmatio:
 - 1.5.30
 libpng:
@@ -63,7 +65,7 @@ openslide:
 pango:
 - '1'
 poppler:
-- '26.05'
+- '26.07'
 target_platform:
 - linux-aarch64
 zip_keys:

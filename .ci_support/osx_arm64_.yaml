@@ -42,6 +42,8 @@ libhwy:
 - '1.4'
 libjpeg_turbo:
 - '3'
+libjxl:
+- '0.12'
 libmatio:
 - 1.5.30
 libpng:
@@ -67,7 +69,7 @@ openslide:
 pango:
 - '1'
 poppler:
-- '26.05'
+- '26.07'
 target_platform:
 - osx-arm64
 zip_keys:
