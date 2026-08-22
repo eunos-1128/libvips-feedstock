@@ -109,8 +109,6 @@ requirements:
     # https://github.com/conda-forge/xorg-libx11-feedstock/issues/51
     - xorg-xorgproto                         # [linux]
     - zlib
-  run:
-    - imagemagick
 
 test:
   commands:
