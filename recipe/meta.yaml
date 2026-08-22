@@ -109,6 +109,9 @@ requirements:
     # https://github.com/conda-forge/xorg-libx11-feedstock/issues/51
     - xorg-xorgproto                         # [linux]
     - zlib
+  run:
+    # https://github.com/conda-forge/imagemagick-feedstock/pull/386
+    - {{ pin_compatible('imagemagick', max_pin='x.x.x') }}
 
 test:
   commands:
