@@ -90,6 +90,7 @@ requirements:
     - libgirepository
     - libheif
     - libhwy
+    - libintl-devel
     - libjpeg-turbo
     - libjxl
     - libmatio
